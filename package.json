@@ -1,0 +1,27 @@
+{
+  "name": "kontakt",
+  "version": "1.0.0",
+  "description": "A digital business card solution for the evolving professional",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abahler/kontakt.git"
+  },
+  "keywords": [
+    "node",
+    "business",
+    "card"
+  ],
+  "author": "Alex Bahler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abahler/kontakt/issues"
+  },
+  "homepage": "https://github.com/abahler/kontakt#readme",
+  "dependencies": {
+    "express": "^4.14.1"
+  }
+}
