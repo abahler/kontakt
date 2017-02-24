@@ -29,7 +29,8 @@ Name: Kontakt
 * Main screen ("I'm logged in, what can I do now?")
 * Business card screen 
 * User search screen 
-
+* Inbox screen (for cards received from other users; showing both "read" and "unread")
+ 
 ### User flows
 
 | Action       | Result        |
@@ -37,3 +38,4 @@ Name: Kontakt
 | User enters valid email/password and hits 'submit' | Main screen |
 | User clicks 'My Card' | Business card screen |
 | User clicks 'Search Users' | User search screen |
+| User clicks 'Inbox' | Inbox screen |
