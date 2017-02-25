@@ -1,11 +1,11 @@
 "use strict";
 
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const server = require('../server.js');
+let chai = require('chai');
+let chaiHttp = require('chai-http');
+let server = require('../server.js');
 
-const should = chai.should();
-const app = server.app;
+let should = chai.should();
+let app = server.app;
 
 chai.use(chaiHttp);
 
