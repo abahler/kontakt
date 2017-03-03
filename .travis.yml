@@ -8,3 +8,10 @@ addons:
     - mongodb-3.2-precise
     packages:
     - mongodb-org-server
+deploy:
+  provider: heroku
+  api_key:
+    secure: mWrJEPOvqGrgTgfpcn/NPZ5XxoZo5lsYF7ur+7IYMdZXV5y8etJXZfCUI5W5T5zVTrD8d6w0/v9pF3VxkjiUWIxt7WGvK4tbzobbV71ljDQfaVwgwME6uhk7SmU7SvTtbNFkzrYgMj242CCspX/tuPLgrGFHRmfI3qyXx+7oHl7r5As2Zk5/MF3H27EcO85D4PqAuIs1QqiCeaeoi3M4hj68U8ikqG8MdGkt4hOdT3Bf1jwAiPgVx1+H4anFmqd48KYO332wQ8CtYCmLApSAsmIyVtnEsFkrt/WmCXYCTegLiTHTUPONsNMX6uyA8XVIlq0A8IZ/IDpJYKJzAWKR6O7WekS+d1aFBIHBrK0RGwK6rpK55Rsaf59/XKa78wlExPwVxm/I2epHoaoPswJMN8kirx1gHcH/eG7SGjQDnXies2VnPbE0YpmGhAovIi02hBcfOwMJFTKawyY02jWNWmMSF1AHrN7e7YPFsGSFXzPv4XiPsLm7D79fdlC2fd+eg73BwewDH1zspGqGI4oGbPZipQnudGvFhLB2cXd6iWTyH8VL7uDgU79EcHXmUM2Gf54JOZYiHtG3pVptZ9WNI4ge3XrlIIA2+k0lDqvOHpyCEEyrrg3IxKwCIDxNU/AjaJxJTUpk7kCeAmmlGxpBdovDObjlZxcjo4abMcXkkCY=
+  app: kontakt
+  on:
+    repo: abahler/kontakt
