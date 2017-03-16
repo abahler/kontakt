@@ -10,13 +10,14 @@ Name: Kontakt
 
 * As a user, I want to be able to log into Kontakt
 * As a user, I want to be able to stay logged in until I manually log out
-* As a user, I want to be able to create a business card **(MVP)**
-* As a user, I want to be able to view and update my business card **(MVP)**
+* As a user, I want to be able to create a business card
+* As a user, I want to be able to view my business card **(MVP)**
+* As a user, I want to be able to update my business card
 * As a user, I want to be able to delete my business card 
 * As a user, I want to be able to search for another user **(MVP)** 
 * As a user, I want to be able to send my business card to other users **(MVP)**
-* As a user, I want to be able to receive a business card from another user **(MVP)**
-* As a user, I want to be able to customize my business card before sending **(MVP)**
+* As a user, I want to be able to receive a business card from another user
+* As a user, I want to be able to customize my business card before sending
 * As a user, I want to be able to attach a note to a business card I send
 * As a user, I want to be able to view my Kontakts (business cards I have accepted) **(MVP)**
 * As a user, I want to be able to view my inbox (_any_ business cards received, plus direct messages) **(MVP)**
