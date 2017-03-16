@@ -121,32 +121,51 @@ Example from the lesson has three functions:
     3. Get and display updates (receives no args, but inherently calls #1, passing it #2)
 
 *** Nomenclature and responsibilities: ***
-getFoo = receives cb function, and calls that function, passing it data
-displayFoo = builds the markup and modifies the DOM (doesn't return, b/c the data is already assembled and returned by API)
+getFoo(cb) = receives callback function `cb`, and calls that function, passing it data
+displayFoo(d) = Takes data object `d`, builds markup and modifies DOM 
+                (doesn't return anything, b/c the data is already assembled and returned by API)
+
+Typical call:
+getFoo(displayFoo);
 */
 
 // 'My Card' screen
 let getCard = (cb) => {                 // Takes callback as usual, but 
     setTimeout(cb(MOCK_CARD), 3000);
 };
-let displayCard = () => {};
+let displayCard = (data) => {};
 
-// 'Search Users' screen
-let getUserSearch = () => {};       
-let displayUserSearch = () => {};       // This displays users that match the search term, or a 'Start typing a name...' message
+/* --- 'Search Users' screen --- */
+let getUserSearch = (cb) => {
+    setTimeout(cb(MOCK_USERS), 3000);
+};       
+let displayUserSearch = (data) => {};   // This displays users that match the search term, or a 'Start typing a name...' message
 
-// 'Send Card' screen
-let displayCardBeforeSend = () => {};
+/* --- 'Send Card' screen --- */
+// Note: no accompanying 'get' function here, 
+// because getCard can be called with the displayCardBeforeSend function as a callback
+// (only a couple differences between displaying card for reference and displaying before sending)
+let displayCardBeforeSend = (data) => {
+    // Display all the usual information the user would see in their own
+    displayCard(data);
+    
+    // And add/modify fields for customization
+};
 
-// 'My Kontakts' screen
-let getKontakts = () => {};
-let displayKontakts = () => {};
+/* --- 'My Kontakts' screen --- */
+let getKontakts = (cb) => {
+    setTimeout(cb(MOCK_KONTAKTS), 3000);
+};
+let displayKontakts = (data) => {};
 
-// 'My Inbox' screen
-let getMessages = () => {};
-let displayMessages = () => {};
+/* --- 'My Inbox' screen --- */
+// (includes 'cards' and 'messages' in reverse chron order, with tab options to see one or both categories)
+let getInbox = (cb) => {
+    setTimeout(cb(MOCK_INBOX), 3000);
+};
+let displayInbox = (data) => {};
 
-// Top-level wrapper function
+/* --- Top-level wrapper function --- */
 let getAndDisplayView = (cb) => {       // Abstraction equivalent to lesson's getAndDisplayStatusUpdates()
                                         // Takes one callback because we're using it for multiple views
     cb();
