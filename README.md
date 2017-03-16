@@ -15,6 +15,7 @@ Name: Kontakt
 * As a user, I want to be able to update my business card
 * As a user, I want to be able to delete my business card 
 * As a user, I want to be able to search for another user **(MVP)** 
+* As a user, I want to be able to see a thumbnail for other users
 * As a user, I want to be able to send my business card to other users **(MVP)**
 * As a user, I want to be able to receive a business card from another user
 * As a user, I want to be able to customize my business card before sending
@@ -35,10 +36,10 @@ Name: Kontakt
 
 * Main screen
 * My Card screen 
-* User Search screen 
+* Search Users screen 
 * Send Card screen
-* Kontakts screen 
-* Inbox screen
+* My Kontakts screen 
+* My Inbox screen
  
 ### User flows
 

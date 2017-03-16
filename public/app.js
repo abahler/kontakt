@@ -1,6 +1,6 @@
 "use strict";
 
-const MOCK_BUSINESS_CARD = {
+const MOCK_CARD = {
     firstName: 'Alex',
     lastName: 'Bahler',
     occupation: 'Software Engineer',
@@ -85,12 +85,47 @@ const MOCK_INBOX = {
     ]
 };
 
-let viewCard = () => {};
+/*
+Example from the lesson has three functions: 
+    1. Get updates (receives a callback function, calls it, passing it data from global scope)
+        * This is the only function that changes in production, when it uses AJAX to hit a real endpoint 
+            instead of merely calling setTimeout()
+    2. Display updates
+    3. Get and display updates (receives no args, but inherently calls #1, passing it #2)
 
-let viewKontakts = () => {};
+*** Nomenclature and responsibilities: ***
+getFoo = receives cb function, and calls that function, passing it data
+displayFoo = builds the markup and modifies the DOM (doesn't return, b/c the data is already assembled and returned by API)
+*/
 
-let viewInbox = () => {};
+// 'My Card' screen
+let getCard = (cb) => {                 // Takes callback as usual, but 
+    setTimeout(cb(MOCK_CARD), 3000);
+};
+let displayCard = () => {};
 
+// 'Search Users' screen
+let getUserSearch = () => {};       
+let displayUserSearch = () => {};       // This displays users that match the search term, or a 'Start typing a name...' message
 
+// 'Send Card' screen
+let displayCardBeforeSend = () => {};
 
+// 'My Kontakts' screen
+let getKontakts = () => {};
+let displayKontakts = () => {};
 
+// 'My Inbox' screen
+let getMessages = () => {};
+let displayMessages = () => {};
+
+// Top-level wrapper function
+let getAndDisplayView = (cb) => {       // Abstraction equivalent to lesson's getAndDisplayStatusUpdates()
+                                        // Takes one callback because we're using it for multiple views
+    cb();
+};
+
+$(document).ready( () => {
+    // Default view will be 'My Card' (for now, the MVP phase)
+    getAndDisplayView(getCard);
+});
