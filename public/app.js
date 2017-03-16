@@ -3,11 +3,38 @@
 const MOCK_CARD = {
     firstName: 'Alex',
     lastName: 'Bahler',
+    userName: 'abahler',
     occupation: 'Software Engineer',
     professionalSummary: 'Experienced architect and programmer focused on elegant, scalable solutions',
     company: 'Kontakt',
     phone: '555-630-2112',
     addlNote: ''        // Optional, customizable note per card sent. Default to empty string.
+};
+
+const MOCK_USERS = {
+    users: [
+        {
+            id: 1001,
+            firstName: 'Adam',
+            lastName: 'Smith',
+            username: 'devguy44',           // Users can choose a handle for easier searching
+            avatar: 'images/users/1001.jpg' // Would be automated on backend to save to 'images/users/{id}.{extension}'
+        },
+        {
+            id: 2001,
+            firstName: 'Andre',
+            lastName: 'Young',
+            username: 'DrDre',
+            avatar: 'images/users/2001.jpg'
+        },
+        {
+            id: 3001,
+            firstName: 'Diana',
+            lastName: 'Luna',
+            username: 'dluna',
+            avatar: 'images/users/3001.jpg'
+        }
+    ]
 };
 
 const MOCK_KONTAKTS = {
