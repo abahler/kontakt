@@ -34,8 +34,9 @@ Name: Kontakt
 ### User screens 
 
 * Main screen
-* Business card screen 
-* User search screen 
+* My Card screen 
+* User Search screen 
+* Send Card screen
 * Kontakts screen 
 * Inbox screen
  
@@ -44,7 +45,8 @@ Name: Kontakt
 | Action       | Result        |
 |:-----------: |:-------------:|
 | User enters valid email/password and hits 'submit' | Main screen |
-| User clicks 'My Card' | Business card screen |
-| User clicks 'Search Users' | User search screen |
+| User clicks 'My Card' | My Card screen |
+| User clicks 'Search Users' | User Search screen |
+| User clicks 'Send Card' | Send Card screen |
 | User clicks 'My Kontakts' | Kontakts screen |
 | User clicks 'Inbox' | Inbox screen |
