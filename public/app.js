@@ -133,7 +133,9 @@ getFoo(displayFoo);
 let getCard = (cb) => {                 // Takes callback as usual, but 
     setTimeout(cb(MOCK_CARD), 3000);
 };
-let displayCard = (data) => {};
+let displayCard = (data) => {
+    // build HTML with `data`
+};
 
 /* --- 'Search Users' screen --- */
 let getUserSearch = (cb) => {
