@@ -7,7 +7,8 @@ const MOCK_CARD = {
     occupation: 'Software Engineer',
     professionalSummary: 'Experienced architect and programmer focused on elegant, scalable solutions',
     company: 'Kontakt',
-    phone: '555-630-2112',
+    officePhone: '555-630-2112',
+    cellPhone: '',
     addlNote: ''        // Optional, customizable note per card sent. Default to empty string.
 };
 
@@ -133,15 +134,52 @@ getFoo(displayFoo);
 let getCard = (cb) => {              
     setTimeout(cb(MOCK_CARD), 3000);
 };
-let displayCard = (data) => {
+let displayCard = (data, editable) => {
     // build HTML with `data`
+    let editIcon = '';
+    if (editable) {     // True if we're on the 'send your card' screen
+        editIcon = '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>';
+    }
+    
+    let output = `<p>First name: ${data.firstName} ${editIcon}</p>`;
+    output += `<p>Last name: ${data.lastName} ${editIcon}</p>`;
+    output += `<p>Username: ${data.userName} ${editIcon}</p>`;
+    output += `<p>Occupation: ${data.occupation} ${editIcon}</p>`;
+    output += `<p>Professional summary: ${data.professionalSummary} ${editIcon}</p>`;
+    output += `<p>Company: ${data.company} ${editIcon}</p>`;
+    output += `<p>Office Phone: ${data.officePhone} ${editIcon}</p>`;
+    
+    // Above fields are required. Provide fallback message if optional one has no value.
+    let phoneVal = data.officePhone || 'Add an office phone';
+    output = `<p>Cell Phone: ${phoneVal}</p>`;
+    
+    $('#root').html(output);
 };
 
 /* --- 'Search Users' screen --- */
 let getUserSearch = (cb) => {
     setTimeout(cb(MOCK_USERS), 3000);
 };       
-let displayUserSearch = (data) => {};   // This displays users that match the search term, or a 'Start typing a name...' message
+let displayUserSearch = (data) => {
+    // Assume there are users to choose from
+    let users = data.users;
+    let output = '<ul>';
+    users.forEach( (v,i) => {
+        output += '<li><img src="${v.avatar}" /><p>${v.username}<br />${v.firstName} ${v.lastName}</p></li>';
+        /*
+                
+            id: 1001,
+            firstName: 'Adam',
+            lastName: 'Smith',
+            username: 'devguy44',           // Users can choose a handle for easier searching
+            avatar: 'images/users/1001.jpg' // Would be automated on backend to save to 'images/users/{id}.{extension}'
+        
+        */
+    });
+    output += '</ul>';
+    
+    $('#root').html(output);
+};   // This displays users that match the search term, or a 'Start typing a name...' message
 
 /* --- 'Send Card' screen --- */
 // Note: no accompanying 'get' function here, 
@@ -149,9 +187,15 @@ let displayUserSearch = (data) => {};   // This displays users that match the se
 // (only a couple differences between displaying card for reference and displaying before sending)
 let displayCardBeforeSend = (data) => {
     // Display all the usual information the user would see in their own
-    displayCard(data);
+    displayCard(data, true);
     
     // And add/modify fields for customization
+    var existingHTML = $('#root').html();
+    
+    let customNote = '<p><textarea id="customNote" name="customNote"></textarea></p>';
+    
+    $('#root').html(existingHTML + customNote);
+    
 };
 
 /* --- 'My Kontakts' screen --- */
@@ -168,12 +212,11 @@ let getInbox = (cb) => {
 let displayInbox = (data) => {};
 
 /* --- Top-level wrapper function --- */
-let getAndDisplayView = (cb) => {       // Abstraction equivalent to lesson's getAndDisplayStatusUpdates()
-                                        // Takes one callback because we're using it for multiple views
-    cb();
-};
 
 $(document).ready( () => {
-    // Default view will be 'My Card' (for now, the MVP phase)
-    getAndDisplayView(getCard);
+    
+    // Set up handlers for each button
+    console.log('Ready for user input!');
+    
+    
 });
