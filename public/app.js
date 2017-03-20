@@ -46,7 +46,8 @@ const MOCK_KONTAKTS = {
             occupation: 'CIO',
             professionalSummary: 'Realizing visions to aid in delivering results to stakeholders',
             company: 'Widgets Inc.',
-            phone: '555-312-6990',
+            officePhone: '555-312-6990',
+            cellPhone: '555-802-1102',
             addlNote: "Nice meeting you at OSCON! Let's keep in touch."
         },
         {
@@ -55,7 +56,8 @@ const MOCK_KONTAKTS = {
             occupation: 'Web Developer',
             professionalSummary: 'Full stack developer with a focus on maintainable, modular code',
             company: 'BlueSky Development',
-            phone: '555-827-1737',
+            officePhone: '555-827-1737',
+            cellPhone: '555-111-0101',
             addlNotes: "Glad we could swap some knowledge at the meetup! Check out my Github."
         },
         {
@@ -64,7 +66,8 @@ const MOCK_KONTAKTS = {
             occupation: 'Graphic Designer',
             professionalSummary: 'Creator of visually appealing and intuitive designs for web and print',
             company: 'self-employed',
-            phone: '555-727-2469',
+            officePhone: '555-727-2469',
+            cellPhone: '',
             addlNotes: ''
         }
     ]
@@ -78,7 +81,8 @@ const MOCK_INBOX = {
             occupation: 'Graphic Designer',
             professionalSummary: 'Creator of visually appealing and intuitive designs for web and print',
             company: 'self-employed',
-            phone: '555-727-2469',
+            officePhone: '555-727-2469',
+            cellPhone: '',
             addlNotes: '',
             read: true          // Note the additional property to tell if it has been read or not
                                 // If the user 'accepts' the card and puts it in their kontakts, this won't be displayed
@@ -89,7 +93,8 @@ const MOCK_INBOX = {
             occupation: 'Project Manager',
             professionalSummary: '',
             company: 'Allspace',
-            phone: '555-827-7236',
+            officePhone: '555-827-7236',
+            cellPhone: '',
             addlNotes: 'Good meeting you at the event Friday. Let me know if you want to talk more about homebuying',
             read: false
         }
@@ -166,15 +171,6 @@ let displayUserSearch = (data) => {
     let output = '<ul>';
     users.forEach( (v,i) => {
         output += '<li><img src="${v.avatar}" /><p>${v.username}<br />${v.firstName} ${v.lastName}</p></li>';
-        /*
-                
-            id: 1001,
-            firstName: 'Adam',
-            lastName: 'Smith',
-            username: 'devguy44',           // Users can choose a handle for easier searching
-            avatar: 'images/users/1001.jpg' // Would be automated on backend to save to 'images/users/{id}.{extension}'
-        
-        */
     });
     output += '</ul>';
     
@@ -202,7 +198,26 @@ let displayCardBeforeSend = (data) => {
 let getKontakts = (cb) => {
     setTimeout(cb(MOCK_KONTAKTS), 3000);
 };
-let displayKontakts = (data) => {};
+let displayKontakts = (data) => {
+    let kontakts = data.kontakts;
+    let output = '<ul>';
+    kontakts.forEach( (v,i) => {
+        output += '<li>';
+        output += `First name: ${v[firstName]}<br>`;
+        output += `Last name: ${v[lastName]}<br>`;
+        output += `Title: ${v[occupation]}<br>`;
+        output += `${v[professionalSummary]}<br>`;
+        output += `${v[company]}<br>`;
+        output += `Office Phone: ${v[officePhone]}<br>`;
+        if (v[addlNote]) {
+            output += `Note: ${v[addlNote]}<br>`;    
+        }
+        output += '</li>';
+    });
+    output += '</ul>';
+
+    $('#root').html(output);
+};
 
 /* --- 'My Inbox' screen --- */
 // (includes 'cards' and 'messages' in reverse chron order, with tab options to see one or both categories)
