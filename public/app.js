@@ -105,6 +105,7 @@ const MOCK_INBOX = {
             from: 'Elizabeth Letterman',
             date: '2017-03-11',
             time: '4:36 PM',
+            subject: 'Coffee??',
             message: 'Hey Alex! How about coffee soon? Would love to talk about how I could help with your app',
             read: false
         },
@@ -112,6 +113,7 @@ const MOCK_INBOX = {
             from: 'Omar Rodrigo',
             date: '2017-02-28',
             time: '12:02 AM',
+            subject: 'Github issue',
             message: 'Don\'t answer now, but there\'s a new Github issue on my project that you should take a look at',
             read: true
         }
@@ -224,14 +226,42 @@ let displayKontakts = (data) => {
 let getInbox = (cb) => {
     setTimeout(cb(MOCK_INBOX), 3000);
 };
-let displayInbox = (data) => {};
+let displayInbox = (data, view) => {    // view should be 'cards', 'messages', or if false, both
+    let cards = data.cards;
+    let messages = data.messages;
+    
+    let output ='<ul>';
+    
+    if (view != 'messages') {
+        // Show the cards
+        cards.forEach( (v,i) => {
+            output += '<li>';
+            output += `${v['firstName']} ${v['lastName']}<br>`;
+            output += `${v['occupation']}`;
+            output += '</li>';
+        });
+    }
+    
+    if (view != 'cards') {
+        // Show the messages
+        messages.forEach( (v,i) => {
+            output += '<li>';
+            output += `<b>${v['subject']}</b>`;
+            output += `${v['from']}`;
+            output += '</li>';
+        });
+    }
+    
+    output += '</ul>';
+    
+    $('#root').html(output);
+};
 
 /* --- Top-level wrapper function --- */
 
-$(document).ready( () => {
-    
+let main = () => {
     // Set up handlers for each button
     console.log('Ready for user input!');
-    
-    
-});
+};
+
+$(document).ready(main);
