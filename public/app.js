@@ -130,7 +130,7 @@ getFoo(displayFoo);
 */
 
 // 'My Card' screen
-let getCard = (cb) => {                 // Takes callback as usual, but 
+let getCard = (cb) => {              
     setTimeout(cb(MOCK_CARD), 3000);
 };
 let displayCard = (data) => {
