@@ -138,8 +138,8 @@ getFoo(displayFoo);
 */
 
 // 'My Card' screen
-let getCard = (cb) => {              
-    setTimeout(cb(MOCK_CARD), 3000);
+let getCard = (cb, isEditable) => { 
+    setTimeout(cb(MOCK_CARD, isEditable), 3000);
 };
 let displayCard = (data, editable) => {
     // build HTML with `data`
@@ -205,14 +205,14 @@ let displayKontakts = (data) => {
     let output = '<ul>';
     kontakts.forEach( (v,i) => {
         output += '<li>';
-        output += `First name: ${v[firstName]}<br>`;
-        output += `Last name: ${v[lastName]}<br>`;
-        output += `Title: ${v[occupation]}<br>`;
-        output += `${v[professionalSummary]}<br>`;
-        output += `${v[company]}<br>`;
-        output += `Office Phone: ${v[officePhone]}<br>`;
-        if (v[addlNote]) {
-            output += `Note: ${v[addlNote]}<br>`;    
+        output += `First name: ${v['firstName']}<br>`;
+        output += `Last name: ${v['lastName']}<br>`;
+        output += `Title: ${v['occupation']}<br>`;
+        output += `${v['professionalSummary']}<br>`;
+        output += `${v['company']}<br>`;
+        output += `Office Phone: ${v['officePhone']}<br>`;
+        if (v['addlNote']) {
+            output += `Note: ${v['addlNote']}<br>`;    
         }
         output += '</li>';
     });
@@ -223,10 +223,10 @@ let displayKontakts = (data) => {
 
 /* --- 'My Inbox' screen --- */
 // (includes 'cards' and 'messages' in reverse chron order, with tab options to see one or both categories)
-let getInbox = (cb) => {
-    setTimeout(cb(MOCK_INBOX), 3000);
+let getInbox = (cb, view) => {
+    setTimeout(cb(MOCK_INBOX, view), 3000);
 };
-let displayInbox = (data, view) => {    // view should be 'cards', 'messages', or if false, both
+let displayInbox = (data, view) => {    // `view` values can be 'cards', 'messages' or 'all'
     let cards = data.cards;
     let messages = data.messages;
     
@@ -262,6 +262,18 @@ let displayInbox = (data, view) => {    // view should be 'cards', 'messages', o
 let main = () => {
     // Set up handlers for each button
     console.log('Ready for user input!');
+    
+    $('#myCard').click( () => {
+        getCard(displayCard, false);
+    });
+    
+    $('#myKontakts').click( () => {
+        getKontakts(displayKontakts);
+    });
+    
+    $('#inbox').click( () => {
+        getInbox(displayInbox, 'all');
+    });
 };
 
 $(document).ready(main);
