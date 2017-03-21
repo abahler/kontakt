@@ -148,7 +148,7 @@ let displayCard = (data, editable) => {
     
     // Above fields are required. Provide fallback message if optional one has no value.
     let phoneVal = data.officePhone || 'Add an office phone';
-    output = `<p>Cell Phone: ${phoneVal}</p>`;
+    output += `<p>Cell Phone: ${phoneVal}</p>`;
     
     $('#root').html(output);
 };
@@ -236,7 +236,7 @@ let displayInbox = (data, view) => {    // `view` values can be 'cards', 'messag
         // Show the messages
         messages.forEach( (v,i) => {
             output += '<li>';
-            output += `<b>${v['subject']}</b>`;
+            output += `<b>${v['subject']}</b><br>`;
             output += `${v['from']}`;
             output += '</li>';
         });

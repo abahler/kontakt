@@ -5,3 +5,7 @@ body {
 #search {
     width: 20%;
 }
+
+#root {
+    border: 1px solid #FDFDFD;
+}
