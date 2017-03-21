@@ -1,5 +1,8 @@
 "use strict";
 
+/*
+ * Mock data
+ */
 const MOCK_CARD = {
     firstName: 'Alex',
     lastName: 'Bahler',
@@ -121,23 +124,10 @@ const MOCK_INBOX = {
 };
 
 /*
-Example from the lesson has three functions: 
-    1. Get updates (receives a callback function, calls it, passing it data from global scope)
-        * This is the only function that changes in production, when it uses AJAX to hit a real endpoint 
-            instead of merely calling setTimeout()
-    2. Display updates
-    3. Get and display updates (receives no args, but inherently calls #1, passing it #2)
+ * Screens
+ */
 
-*** Nomenclature and responsibilities: ***
-getFoo(cb) = receives callback function `cb`, and calls that function, passing it data
-displayFoo(d) = Takes data object `d`, builds markup and modifies DOM 
-                (doesn't return anything, b/c the data is already assembled and returned by API)
-
-Typical call:
-getFoo(displayFoo);
-*/
-
-// 'My Card' screen
+// 'My Card'
 let getCard = (cb, isEditable) => { 
     setTimeout(cb(MOCK_CARD, isEditable), 3000);
 };
@@ -163,7 +153,7 @@ let displayCard = (data, editable) => {
     $('#root').html(output);
 };
 
-/* --- 'Search Users' screen --- */
+// 'Search Users'
 let getUserSearch = (cb) => {
     setTimeout(cb(MOCK_USERS), 3000);
 };       
@@ -179,7 +169,7 @@ let displayUserSearch = (data) => {
     $('#root').html(output);
 };   // This displays users that match the search term, or a 'Start typing a name...' message
 
-/* --- 'Send Card' screen --- */
+// 'Send Card'
 // Note: no accompanying 'get' function here, 
 // because getCard can be called with the displayCardBeforeSend function as a callback
 // (only a couple differences between displaying card for reference and displaying before sending)
@@ -196,7 +186,7 @@ let displayCardBeforeSend = (data) => {
     
 };
 
-/* --- 'My Kontakts' screen --- */
+// 'My Kontakts'
 let getKontakts = (cb) => {
     setTimeout(cb(MOCK_KONTAKTS), 3000);
 };
@@ -221,7 +211,7 @@ let displayKontakts = (data) => {
     $('#root').html(output);
 };
 
-/* --- 'My Inbox' screen --- */
+// 'My Inbox'
 // (includes 'cards' and 'messages' in reverse chron order, with tab options to see one or both categories)
 let getInbox = (cb, view) => {
     setTimeout(cb(MOCK_INBOX, view), 3000);
@@ -257,12 +247,12 @@ let displayInbox = (data, view) => {    // `view` values can be 'cards', 'messag
     $('#root').html(output);
 };
 
-/* --- Top-level wrapper function --- */
+/*  
+ * Top-level wrapper function
+ */
 
 let main = () => {
     // Set up handlers for each button
-    console.log('Ready for user input!');
-    
     $('#myCard').click( () => {
         getCard(displayCard, false);
     });
