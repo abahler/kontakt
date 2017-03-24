@@ -16,13 +16,15 @@
     "card"
   ],
   "author": "Alex Bahler",
-  "license": "ISC", 
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/abahler/kontakt/issues"
   },
   "homepage": "https://github.com/abahler/kontakt#readme",
   "dependencies": {
-    "express": "^4.14.1"
+    "body-parser": "^1.17.1",
+    "express": "^4.14.1",
+    "mongoose": "^4.9.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
