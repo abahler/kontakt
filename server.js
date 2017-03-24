@@ -18,20 +18,24 @@ let runServer = (callback) => {
 
         app.listen(config.PORT, () => {
             console.log('Listening on localhost:' + config.PORT);
-            if (callback) {
+            if (callback) {     // Signal that everything is up and running
                 callback();
             }
         });
     });
 };
 
-if (require.main === module) {
+if (require.main === module) {  // If this script is run directly (not required somewhere else)
     runServer(function(err) {
         if (err) {
             console.error(err);
         }
     });
 }
+
+let Card = require('./models/card');
+let Message = require('./models/message');
+let User = require('./models/user');
 
 // Routes
 app.get('/', (req, res) => {
