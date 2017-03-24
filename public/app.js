@@ -21,21 +21,21 @@ const MOCK_USERS = {
             id: 1001,
             firstName: 'Adam',
             lastName: 'Smith',
-            username: 'devguy44',           // Users can choose a handle for easier searching
+            userName: 'devguy44',           // Users can choose a handle for easier searching
             avatar: 'images/users/1001.jpg' // Would be automated on backend to save to 'images/users/{id}.{extension}'
         },
         {
             id: 2001,
             firstName: 'Andre',
             lastName: 'Young',
-            username: 'DrDre',
+            userName: 'DrDre',
             avatar: 'images/users/2001.jpg'
         },
         {
             id: 3001,
             firstName: 'Diana',
             lastName: 'Luna',
-            username: 'dluna',
+            userName: 'dluna',
             avatar: 'images/users/3001.jpg'
         }
     ]
@@ -106,16 +106,14 @@ const MOCK_INBOX = {
         // Users can only send messages to their kontakts
         {
             from: 'Elizabeth Letterman',
-            date: '2017-03-11',
-            time: '4:36 PM',
+            dateTime: '2017-03-11 4:36 PM',
             subject: 'Coffee??',
             message: 'Hey Alex! How about coffee soon? Would love to talk about how I could help with your app',
             read: false
         },
         {
             from: 'Omar Rodrigo',
-            date: '2017-02-28',
-            time: '12:02 AM',
+            dateTime: '2017-02-28 12:02 AM',
             subject: 'Github issue',
             message: 'Don\'t answer now, but there\'s a new Github issue on my project that you should take a look at',
             read: true
