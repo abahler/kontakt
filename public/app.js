@@ -98,7 +98,7 @@ const MOCK_INBOX = {
             firstName: 'Jose',
             lastName: 'Montenegro',
             userName: 'jaymo808',
-            occupation: 'Project Manager',
+            occupation: 'Assistant Branch Manager',
             professionalSummary: '',
             company: 'Allspace',
             officePhone: '555-827-7236',
