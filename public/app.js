@@ -46,6 +46,7 @@ const MOCK_KONTAKTS = {
         {
             firstName: 'Cara',
             lastName: 'Smith',
+            userName: 'csmith',
             occupation: 'CIO',
             professionalSummary: 'Realizing visions to aid in delivering results to stakeholders',
             company: 'Widgets Inc.',
@@ -56,6 +57,7 @@ const MOCK_KONTAKTS = {
         {
             firstName: 'Omar',
             lastName: 'Rodrigo',
+            userName: 'flashman99',
             occupation: 'Web Developer',
             professionalSummary: 'Full stack developer with a focus on maintainable, modular code',
             company: 'BlueSky Development',
@@ -66,6 +68,7 @@ const MOCK_KONTAKTS = {
         {
             firstName: 'Elizabeth',
             lastName: 'Letterman',
+            userName: 'ByDSyn',
             occupation: 'Graphic Designer',
             professionalSummary: 'Creator of visually appealing and intuitive designs for web and print',
             company: 'self-employed',
@@ -81,6 +84,7 @@ const MOCK_INBOX = {
         {
             firstName: 'Elizabeth',
             lastName: 'Letterman',
+            username: 'ByDSyn',
             occupation: 'Graphic Designer',
             professionalSummary: 'Creator of visually appealing and intuitive designs for web and print',
             company: 'self-employed',
@@ -93,6 +97,7 @@ const MOCK_INBOX = {
         {
             firstName: 'Jose',
             lastName: 'Montenegro',
+            userName: 'jaymo808',
             occupation: 'Project Manager',
             professionalSummary: '',
             company: 'Allspace',
