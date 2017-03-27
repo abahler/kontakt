@@ -57,15 +57,15 @@ app.post('/card', (req, res) => {
     });
 });
 
-// GET /user: Get all users
-app.get('/user', (req, res) => {
+// GET /users: Get all users
+app.get('/users', (req, res) => {
     console.log('A GET request to /user was received!');
-    User.find({}, (err, user) => {
-        if (err) {
+    User.find({}, (err, users) => {
+        if (err || !users) {
             res.status(500).json({'error': err});
         }
-        console.log('user object: ', user);
-        res.status(201).json(user);
+        console.log('user list: ', users);
+        res.status(201).json(users);
     });
 });
 
