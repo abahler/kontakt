@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
     res.status(200).send('Hello World!');
 });
 
+// GET /card: Get all cards
 app.get('/card', (req, res) => {
     console.log('A GET request to /card was received!');
     Card.find({}, (err, card) => {
@@ -30,6 +31,7 @@ app.get('/card', (req, res) => {
     });
 });
 
+// POST /card: Create a business card
 // Don't need bodyParser as second arg because we set it using app.use()
 app.post('/card', (req, res) => {
     console.log('A POST request to /card was received!');
@@ -52,6 +54,39 @@ app.post('/card', (req, res) => {
         }
         
         return res.status(201).json(card);
+    });
+});
+
+// GET /user: Get all users
+app.get('/user', (req, res) => {
+    console.log('A GET request to /user was received!');
+    User.find({}, (err, user) => {
+        if (err) {
+            res.status(500).json({'error': err});
+        }
+        console.log('user object: ', user);
+        res.status(201).json(user);
+    });
+});
+
+// POST /user: Create a new user
+app.post('/user', (req, res) => {
+    console.log('A POST request to /user was received!');
+    console.log('req dot body: ', req.body);
+    let obj = {
+            id: 1001,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            userName: req.body.userName,         
+            avatar: req.body.avatar    
+        };
+    
+    User.create(obj, (err, user) => {
+        if (err || !user) {
+            return res.status(500).json({'error': err});
+        }
+        
+        return res.status(201).json(user);
     });
 });
 
