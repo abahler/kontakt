@@ -18,25 +18,25 @@ const MOCK_CARD = {
 const MOCK_USERS = {
     users: [
         {
-            id: 1001,
             firstName: 'Adam',
             lastName: 'Smith',
             userName: 'devguy44',           // Users can choose a handle for easier searching
-            avatar: 'images/users/1001.jpg' // Would be automated on backend to save to 'images/users/{id}.{extension}'
+            avatar: 'images/users/1001.jpg', // Would be automated on backend to save to 'images/users/{id}.{extension}'
+            kontakts: []
         },
         {
-            id: 2001,
             firstName: 'Andre',
             lastName: 'Young',
             userName: 'DrDre',
-            avatar: 'images/users/2001.jpg'
+            avatar: 'images/users/2001.jpg',
+            kontakts: []
         },
         {
-            id: 3001,
             firstName: 'Diana',
             lastName: 'Luna',
             userName: 'dluna',
-            avatar: 'images/users/3001.jpg'
+            avatar: 'images/users/3001.jpg',
+            kontakts: []
         }
     ]
 };
