@@ -77,7 +77,8 @@ app.post('/user', (req, res) => {
             id: 1001,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            userName: req.body.userName,         
+            userName: req.body.userName, 
+            password: req.body.password,
             avatar: req.body.avatar    
         };
     
