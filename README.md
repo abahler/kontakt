@@ -30,7 +30,6 @@ Name: Kontakt
 * As a user, I want to be able to message users with whom I have exchanged cards 
 * As a user, I want to be able to upload a profile picture
 * As a user, I want to be able to choose a template for my business card
-* As a user, I want to be able to create a short bio separate from my card
 
 ### User screens 
 
