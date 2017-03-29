@@ -14,7 +14,7 @@ Name: Kontakt
 * As a user, I want to be able to view my business card **(MVP)**
 * As a user, I want to be able to update my business card
 * As a user, I want to be able to delete my business card 
-* As a user, I want to be able to search and add Kontakts **(MVP)** 
+* As a user, I want to be able to search for Kontakts **(MVP)** 
 * As a user, I want to be able to see a thumbnail for other users
 * As a user, I want to be able to send my business card to other users **(MVP)**
 * As a user, I want to be able to receive a business card from another user
