@@ -1,5 +1,9 @@
 "use strict";
 
+/*
+ * DEPENDENCIES AND CONFIG
+ */
+
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -14,9 +18,22 @@ let User = require('./models/user');
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-// Routes
+/*
+ * ROUTES 
+ */
+ 
 app.get('/', (req, res) => {
+    // This line does nothing because it is overwritten by the .html file's markup
     res.status(200).send('Hello World!');
+});
+
+// GET /admin: A sandbox for digging into internals and debugging
+app.get('/admin', (req, res) => {
+    res.status(201).json({"process-dot-env": process.env});
+    
+    global.alexDidThis = 'alex says hello';
+    
+    console.log('global: ', global);
 });
 
 // GET /card: Get all cards
@@ -115,6 +132,10 @@ if (require.main === module) {  // If this script is run directly (not required 
         }
     });
 }
+
+/*
+ * EXPORTS
+ */
 
 exports.app = app;
 exports.runServer = runServer;
