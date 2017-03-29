@@ -54,6 +54,7 @@ app.get('/kontakts', (req, res) => {
 // > Client will take care of displaying add'l features for the latter, like 'Edit' icons
 // app.get('/card/:userName', (req, res) => {});
 
+/*
 // POST /card: Create a business card
 // Don't need bodyParser as second arg because we set it using app.use()
 app.post('/card', (req, res) => {
@@ -79,6 +80,7 @@ app.post('/card', (req, res) => {
         return res.status(201).json(card);
     });
 });
+*/
 
 /* 
 // POST /card/send: Send the current user's card to the selected user
