@@ -40,12 +40,12 @@ app.get('/admin', (req, res) => {
 
 // GET /kontakts: Get all Kontakts (cards)
 app.get('/kontakts', (req, res) => {
-    Card.find({}, (err, card) => {
+    Card.find({}, (err, cards) => {
         if (err) {
             res.status(500).json({'error': err});
         }
-        console.log('card object: ', card);
-        res.status(201).json(card);
+        console.log('cards object: ', cards);
+        res.status(201).json(cards);
     });
 });
 
