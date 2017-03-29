@@ -22,6 +22,7 @@ app.use(express.static('public'));
  * ROUTES 
  */
  
+// GET /: Main screen
 app.get('/', (req, res) => {
     // This line does nothing because it is overwritten by the .html file's markup
     res.status(200).send('Hello World!');
@@ -29,16 +30,16 @@ app.get('/', (req, res) => {
 
 // GET /admin: A sandbox for digging into internals and debugging
 app.get('/admin', (req, res) => {
+    // TODO: enhance after MVP stage to check for proper permissions in current user object
     res.status(201).json({"process-dot-env": process.env});
     
-    global.alexDidThis = 'alex says hello';
+    global.adminDidThis = 'The admin says hello';
     
     console.log('global: ', global);
 });
 
-// GET /card: Get all cards
-app.get('/card', (req, res) => {
-    console.log('A GET request to /card was received!');
+// GET /kontakts: Get all Kontakts (cards)
+app.get('/kontakts', (req, res) => {
     Card.find({}, (err, card) => {
         if (err) {
             res.status(500).json({'error': err});
@@ -48,12 +49,17 @@ app.get('/card', (req, res) => {
     });
 });
 
+// GET /card/:userName: Retrieve current user's card.
+// > NOTE: this will be used to show card both for reference ('My Card') and before sending to a new kontakt ('Send Card')
+// > Client will take care of displaying add'l features for the latter, like 'Edit' icons
+// app.get('/card/:userName', (req, res) => {});
+
 // POST /card: Create a business card
 // Don't need bodyParser as second arg because we set it using app.use()
 app.post('/card', (req, res) => {
     console.log('A POST request to /card was received!');
     console.log('req dot body: ', req.body);
-    let obj = {
+    let newCard = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         userName: req.body.userName,
@@ -65,7 +71,7 @@ app.post('/card', (req, res) => {
         addlNote: req.body.addlNote
     };
     
-    Card.create(obj, (err, card) => {
+    Card.create(newCard, (err, card) => {
         if (err || !card) {
             return res.status(500).json({'error': err});
         }
@@ -74,8 +80,24 @@ app.post('/card', (req, res) => {
     });
 });
 
-// GET /users: Get all users
-app.get('/users', (req, res) => {
+/* 
+// POST /card/send: Send the current user's card to the selected user
+app.post('/card/send', (req, res) => {
+    let postData = {
+        fromUser: req.body.from
+        toUser: req.body.to
+    };    
+    
+    // > Query for the 'from' user's card.
+    // > Take that card and push it onto the 'to' user's kontakts array
+});
+*/
+
+/*
+// GET /users/:searchTerm : Get all users where first or last name contains `searchTerm`
+app.get('/users/:searchTerm', (req, res) => {
+    let searchTerm = req.body.searchTerm;
+    
     console.log('A GET request to /user was received!');
     User.find({}, (err, users) => {
         if (err || !users) {
@@ -85,7 +107,9 @@ app.get('/users', (req, res) => {
         res.status(201).json(users);
     });
 });
+*/
 
+/*
 // POST /user: Create a new user
 app.post('/user', (req, res) => {
     console.log('A POST request to /user was received!');
@@ -107,6 +131,7 @@ app.post('/user', (req, res) => {
         return res.status(201).json(user);
     });
 });
+*/
 
 // Set up MongoDB connection. The moment you connect to localhost/kontakt, it will create it if not exists.
 let runServer = (callback) => {
