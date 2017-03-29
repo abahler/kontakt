@@ -45,6 +45,6 @@ Name: Kontakt
 |:-----------: |:-------------:|
 | User enters valid email/password and hits 'submit' | Main screen |
 | User clicks 'My Card' | My Card screen |
-| User clicks 'Search Users' | User Search screen |
+| User clicks 'Search Users' | Search Users screen |
 | User clicks 'Send Card' | Send Card screen |
-| User clicks 'My Kontakts' | Kontakts screen |
+| User clicks 'My Kontakts' | My Kontakts screen |
