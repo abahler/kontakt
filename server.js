@@ -28,6 +28,11 @@ app.get('/', (req, res) => {
     res.status(200).send('Hello World!');
 });
 
+// GET /foobar: Return some dummy JSON
+app.get('/foobar', (req, res) => {
+    res.status(201).json({"message": "success!"});
+});
+
 // GET /admin: A sandbox for digging into internals and debugging
 app.get('/admin', (req, res) => {
     // TODO: enhance after MVP stage to check for proper permissions in current user object
@@ -52,6 +57,8 @@ app.get('/kontakts', (req, res) => {
         res.status(201).json({"cards": cards});
     });
 });
+
+
 
 // GET /card/:userName: Retrieve current user's card.
 // > NOTE: this will be used to show card both for reference ('My Card') and before sending to a new kontakt ('Send Card')

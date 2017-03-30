@@ -21,9 +21,19 @@ describe('kontakt', () => {
         });
     });
 
-    it('should return a 201 on a GET for the kontakts listing', (done) => {
+    // it('should return a 201 on a GET for the kontakts listing', (done) => {
+    //     chai.request(app)
+    //     .get('/kontakts')
+    //     .end( (err, res) => {
+    //         should.equal(err, null);
+    //         res.should.have.status(201);
+    //         done();
+    //     });
+    // });
+    
+    it('should return a 201 on a GET for the foobar listing', (done) => {
         chai.request(app)
-        .get('/kontakts')
+        .get('/foobar')
         .end( (err, res) => {
             should.equal(err, null);
             res.should.have.status(201);
