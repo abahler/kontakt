@@ -38,14 +38,18 @@ app.get('/admin', (req, res) => {
     console.log('global: ', global);
 });
 
-// GET /kontakts: Get all Kontakts (cards)
+// GET /kontakts: Get all Kontakts (cards).
+// TODO: enhance to take username parameter, and get all kontakts for that user
 app.get('/kontakts', (req, res) => {
-    Card.find({}, (err, cards) => {
-        if (err) {
+    // res.status(201).json({"test": "this is a test"});        // When only this line is commented in, it works.
+    Card.find({}, (err, cards) => {         
+        if (err || !cards) {
             res.status(500).json({'error': err});
         }
+        
         console.log('cards object: ', cards);
-        res.status(201).json(cards);
+        // `cards` is an array
+        res.status(201).json({"cards": cards});
     });
 });
 
