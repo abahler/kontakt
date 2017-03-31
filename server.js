@@ -45,9 +45,11 @@ app.get('/admin', (req, res) => {
 
 // GET /kontakts: Get all Kontakts (cards).
 // TODO: enhance to take username parameter, and get all kontakts for that user
-app.get('/kontakts', (req, res) => {
+app.get('/kontakts/:username', (req, res) => {
+    let userName = req.params.username;
+    
     let outerCards = {cards: ''};
-    Card.find({}, (err, cards) => {         
+    Card.find({"userName": userName}, (err, cards) => {         
         if (err || !cards) {
             res.status(500).json({'error': err});
         }
@@ -123,7 +125,7 @@ app.get('/users/:searchTerm', (req, res) => {
 });
 */
 
-/*
+
 // POST /user: Create a new user
 app.post('/user', (req, res) => {
     console.log('A POST request to /user was received!');
@@ -134,7 +136,8 @@ app.post('/user', (req, res) => {
             lastName: req.body.lastName,
             userName: req.body.userName, 
             password: req.body.password,
-            avatar: req.body.avatar    
+            avatar: req.body.avatar,
+            kontakts: req.body.kontakts
         };
     
     User.create(obj, (err, user) => {
@@ -145,7 +148,6 @@ app.post('/user', (req, res) => {
         return res.status(201).json(user);
     });
 });
-*/
 
 // Set up MongoDB connection. The moment you connect to localhost/kontakt, it will create it if not exists.
 let runServer = (callback) => {
