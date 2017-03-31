@@ -31,9 +31,9 @@ describe('kontakt', () => {
         });
     });
 
-    it('should return a 201 on a GET for the kontakts listing', (done) => {
+    it('should return a 201 on a GET for /kontakts/:userName', (done) => {
         chai.request(app)
-        .get('/kontakts')
+        .get('/kontakts/DrDre')
         .end( (err, res) => {
             should.equal(err, null);
             res.should.have.status(201);
