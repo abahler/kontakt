@@ -46,16 +46,17 @@ app.get('/admin', (req, res) => {
 // GET /kontakts: Get all Kontakts (cards).
 // TODO: enhance to take username parameter, and get all kontakts for that user
 app.get('/kontakts', (req, res) => {
-    // res.status(201).json({"test": "this is a test"});        // When only this line is commented in, it works.
+    let outerCards = {cards: ''};
     Card.find({}, (err, cards) => {         
         if (err || !cards) {
             res.status(500).json({'error': err});
         }
         
         console.log('cards object: ', cards);
-        // `cards` is an array
-        res.status(201).json({"cards": cards});
+        outerCards['cards'] = cards;
     });
+    
+    res.status(201).json(outerCards);
 });
 
 
