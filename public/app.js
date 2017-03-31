@@ -3,46 +3,19 @@
 /*
  * Mock data
  */
-const MOCK_CARD = {
-    firstName: 'Alex',
-    lastName: 'Bahler',
-    userName: 'abahler',
-    occupation: 'Software Engineer',
-    professionalSummary: 'Experienced architect and programmer focused on elegant, scalable solutions',
-    company: 'Kontakt',
-    officePhone: '555-630-2112',
-    cellPhone: '',
-    addlNote: ''        // Optional, customizable note per card sent. Default to empty string.
-};
-
-const MOCK_USERS = {
-    users: [
+const MOCK_CARDS = {
+    cards: [
         {
-            firstName: 'Adam',
-            lastName: 'Smith',
-            userName: 'devguy44',           // Users can choose a handle for easier searching
-            avatar: 'images/users/1001.jpg', // Would be automated on backend to save to 'images/users/{id}.{extension}'
-            kontakts: []
+            firstName: 'Alex',
+            lastName: 'Bahler',
+            userName: 'abahler',
+            occupation: 'Software Engineer',
+            professionalSummary: 'Experienced architect and programmer focused on elegant, scalable solutions',
+            company: 'Kontakt',
+            officePhone: '555-630-2112',
+            cellPhone: '',
+            addlNote: ''        // Optional, customizable note per card sent. Default to empty string.            
         },
-        {
-            firstName: 'Andre',
-            lastName: 'Young',
-            userName: 'DrDre',
-            avatar: 'images/users/2001.jpg',
-            kontakts: []
-        },
-        {
-            firstName: 'Diana',
-            lastName: 'Luna',
-            userName: 'dluna',
-            avatar: 'images/users/3001.jpg',
-            kontakts: []
-        }
-    ]
-};
-
-const MOCK_KONTAKTS = {
-    kontakts: [
         {
             firstName: 'Cara',
             lastName: 'Smith',
@@ -79,49 +52,74 @@ const MOCK_KONTAKTS = {
     ]
 };
 
-const MOCK_INBOX = {        
-    cards: [
+const MOCK_USERS = {
+    users: [
         {
-            firstName: 'Elizabeth',
-            lastName: 'Letterman',
-            username: 'ByDSyn',
-            occupation: 'Graphic Designer',
-            professionalSummary: 'Creator of visually appealing and intuitive designs for web and print',
-            company: 'self-employed',
-            officePhone: '555-727-2469',
-            cellPhone: '',
-            addlNotes: '',
-            read: true          // Note the additional property to tell if it has been read or not
-                                // If the user 'accepts' the card and puts it in their kontakts, this won't be displayed
+            firstName: 'Alex',
+            lastName: 'Bahler',
+            userName: 'abahler',
+            password: 'pw1001',
+            avatar: 'images/users/1001.jpg',
+            kontakts: []
         },
         {
-            firstName: 'Jose',
-            lastName: 'Montenegro',
-            userName: 'jaymo808',
-            occupation: 'Assistant Branch Manager',
-            professionalSummary: '',
-            company: 'Allspace',
-            officePhone: '555-827-7236',
-            cellPhone: '',
-            addlNotes: 'Good meeting you at the event Friday. Let me know if you want to talk more about homebuying',
-            read: false
-        }
-    ],
-    messages: [         // cards.length does not have to equal messages.length. These are separate categories.
-        // Users can only send messages to their kontakts
-        {
-            from: 'Elizabeth Letterman',
-            dateTime: '2017-03-11 4:36 PM',
-            subject: 'Coffee??',
-            message: 'Hey Alex! How about coffee soon? Would love to talk about how I could help with your app',
-            read: false
+            firstName: 'Adam',
+            lastName: 'Smith',
+            userName: 'devguy44',           
+            password: 'pw123',
+            avatar: 'images/users/3001.jpg',
+            kontakts: []
         },
         {
-            from: 'Omar Rodrigo',
-            dateTime: '2017-02-28 12:02 AM',
-            subject: 'Github issue',
-            message: 'Don\'t answer now, but there\'s a new Github issue on my project that you should take a look at',
-            read: true
+            firstName: 'Andre',
+            lastName: 'Young',
+            userName: 'DrDre',
+            password: 'pw456',
+            avatar: 'images/users/2001.jpg',
+            kontakts: [
+                {
+                    firstName: 'Cara',
+                    lastName: 'Smith',
+                    userName: 'csmith',
+                    occupation: 'CIO',
+                    professionalSummary: 'Realizing visions to aid in delivering results to stakeholders',
+                    company: 'Widgets Inc.',
+                    officePhone: '555-312-6990',
+                    cellPhone: '555-802-1102',
+                    addlNote: "Nice meeting you at OSCON! Let's keep in touch."
+                },
+                {
+                    firstName: 'Omar',
+                    lastName: 'Rodrigo',
+                    userName: 'flashman99',
+                    occupation: 'Web Developer',
+                    professionalSummary: 'Full stack developer with a focus on maintainable, modular code',
+                    company: 'BlueSky Development',
+                    officePhone: '555-827-1737',
+                    cellPhone: '555-111-0101',
+                    addlNotes: "Glad we could swap some knowledge at the meetup! Check out my Github."
+                }
+            ]
+        },
+        {
+            firstName: 'Diana',
+            lastName: 'Luna',
+            userName: 'dluna',
+            password: 'pw789',
+            avatar: 'images/users/4001.jpg',
+            kontakts: [
+                {
+                    firstName: 'Elizabeth',
+                    lastName: 'Letterman',
+                    userName: 'ByDSyn',
+                    occupation: 'Graphic Designer',
+                    professionalSummary: 'Creator of visually appealing and intuitive designs for web and print',
+                    company: 'self-employed',
+                    officePhone: '555-727-2469',
+                    cellPhone: '',
+                    addlNotes: '' 
+                }    
+            ]
         }
     ]
 };
@@ -132,7 +130,7 @@ const MOCK_INBOX = {
 
 // 'My Card'
 let getCard = (cb, isEditable) => { 
-    setTimeout(cb(MOCK_CARD, isEditable), 3000);
+    setTimeout(cb(MOCK_CARDS, isEditable), 3000);
 };
 let displayCard = (data, editable) => {
     // build HTML with `data`
@@ -214,42 +212,6 @@ let displayKontakts = (data) => {
     $('#root').html(output);
 };
 
-// 'My Inbox'
-// (includes 'cards' and 'messages' in reverse chron order, with tab options to see one or both categories)
-let getInbox = (cb, view) => {
-    setTimeout(cb(MOCK_INBOX, view), 3000);
-};
-let displayInbox = (data, view) => {    // `view` values can be 'cards', 'messages' or 'all'
-    let cards = data.cards;
-    let messages = data.messages;
-    
-    let output ='<ul>';
-    
-    if (view != 'messages') {
-        // Show the cards
-        cards.forEach( (v,i) => {
-            output += '<li>';
-            output += `${v['firstName']} ${v['lastName']}<br>`;
-            output += `${v['occupation']}`;
-            output += '</li>';
-        });
-    }
-    
-    if (view != 'cards') {
-        // Show the messages
-        messages.forEach( (v,i) => {
-            output += '<li>';
-            output += `<b>${v['subject']}</b><br>`;
-            output += `${v['from']}`;
-            output += '</li>';
-        });
-    }
-    
-    output += '</ul>';
-    
-    $('#root').html(output);
-};
-
 /*  
  * Top-level wrapper function
  */
@@ -262,10 +224,6 @@ let main = () => {
     
     $('#myKontakts').click( () => {
         getKontakts(displayKontakts);
-    });
-    
-    $('#inbox').click( () => {
-        getInbox(displayInbox, 'all');
     });
 };
 
