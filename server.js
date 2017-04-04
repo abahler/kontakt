@@ -12,7 +12,6 @@ const config = require('./config');
 
 // Require models
 let Card = require('./models/card');
-let Message = require('./models/message');
 let User = require('./models/user');
 
 app.use(bodyParser.json());
@@ -43,30 +42,39 @@ app.get('/admin', (req, res) => {
     console.log('global: ', global);
 });
 
-// GET /kontakts: Get all Kontakts (cards).
-// TODO: enhance to take username parameter, and get all kontakts for that user
+// GET /kontakts/:username: Get all Kontakts (business cards) for the specified user
 app.get('/kontakts/:username', (req, res) => {
     let userName = req.params.username;
     
-    let outerCards = {cards: ''};
-    Card.find({"userName": userName}, (err, cards) => {         
-        if (err || !cards) {
+    // let outerCards;
+    User.findOne({"userName": userName}, (err, user) => {         
+        if (err || !user) {
             res.status(500).json({'error': err});
         }
         
-        console.log('cards object: ', cards);
-        outerCards['cards'] = cards;
+        console.log('user object: ', user);
+        res.status(201).json({"kontakts": user.kontakts});
+        // Assigning `user.kontakts` to `outerCards` and sending the response on line 60 works
     });
     
-    res.status(201).json(outerCards);
+    // res.status(201).json(outerCards);
 });
-
 
 
 // GET /card/:userName: Retrieve current user's card.
 // > NOTE: this will be used to show card both for reference ('My Card') and before sending to a new kontakt ('Send Card')
 // > Client will take care of displaying add'l features for the latter, like 'Edit' icons
-// app.get('/card/:userName', (req, res) => {});
+app.get('/card/:userName', (req, res) => {
+    let userName = req.params.userName;
+    
+    Card.findOne({"userName": userName}, (err, card) => {
+        if (err || !card) {
+            res.status(500).json({"error": err});
+        }
+        
+        res.status(201).json(card);
+    });
+});
 
 /*
 // POST /card: Create a business card
@@ -166,6 +174,8 @@ let runServer = (callback) => {
     });
 };
 
+
+
 if (require.main === module) {  // If this script is run directly (not required somewhere else)
     runServer(function(err) {
         if (err) {
@@ -174,9 +184,10 @@ if (require.main === module) {  // If this script is run directly (not required 
     });
 }
 
+
 /*
  * EXPORTS
  */
-
-exports.app = app;
-exports.runServer = runServer;
+ 
+module.exports = app;
+module.exports = runServer;
