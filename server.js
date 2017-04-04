@@ -89,7 +89,6 @@ app.post('/card/send', (req, res) => {
 });
 */
 
-
 // GET /users/:searchTerm : Get all users where first or last name contains `searchTerm`
 app.get('/users/:searchTerm', (req, res) => {
     let searchTerm = req.params.searchTerm;
