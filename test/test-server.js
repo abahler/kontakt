@@ -1,40 +1,41 @@
 "use strict";
 
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const server = require('../server.js');
+let chai = require('chai');
+let chaiHttp = require('chai-http');
+let server = require('../server.js');
 
 let should = chai.should();
 let app = server.app;
 
 chai.use(chaiHttp);
 
-describe('kontakt', () => {
+describe('kontakt', function(){
 
-    it('should return a 200 on a GET for the root URL', (done) => {
+    it('should return a 200 on a GET for the root URL', function(done){
         chai.request(app)
         .get('/')
-        .end( (err, res) => {
+        .end( function(err, res){
             should.equal(err, null);
             res.should.have.status(200);
             done();
         });
     });
 
-    it('should return a 201 on a GET for the foobar listing', (done) => {
+    it('should return a 201 on a GET to /foobar', function(done){
         chai.request(app)
         .get('/foobar')
-        .end( (err, res) => {
+        .end( function(err, res){
             should.equal(err, null);
             res.should.have.status(201);
             done();
         });
     });
 
-    it('should return a 201 on a GET for /kontakts/:userName', (done) => {
+    it('should return a 201 on a GET for /kontakts/dluna', function(done) {
         chai.request(app)
-        .get('/kontakts/DrDre')
-        .end( (err, res) => {
+        .get("/kontakts/dluna")
+        .end( function(err, res){
+            console.log('res: ', res);
             should.equal(err, null);
             res.should.have.status(201);
             done();
