@@ -76,7 +76,57 @@ app.get('/card/:userName', (req, res) => {
     });
 });
 
-/*
+/* 
+// POST /card/send: Send the current user's card to the selected user
+app.post('/card/send', (req, res) => {
+    let postData = {
+        fromUser: req.body.from
+        toUser: req.body.to
+    };    
+    
+    // > Query for the 'from' user's card.
+    // > Take that card and push it onto the 'to' user's kontakts array
+});
+*/
+
+
+// GET /users/:searchTerm : Get all users where first or last name contains `searchTerm`
+app.get('/users/:searchTerm', (req, res) => {
+    let searchTerm = req.body.searchTerm;
+    let regex = new RegExp(searchTerm, 'i');
+
+    console.log('A GET request to /user was received!');
+    User.find({"firstName": {$regex: regex}}, (err, users) => {
+        if (err || !users) {
+            res.status(500).json({'error': err});
+        }
+        res.status(201).json(users);
+    });
+});
+
+// POST /user: Create a new user
+app.post('/user', (req, res) => {
+    console.log('A POST request to /user was received!');
+    console.log('req dot body: ', req.body);
+    let obj = {
+            id: 1001,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            userName: req.body.userName, 
+            password: req.body.password,
+            avatar: req.body.avatar,
+            kontakts: req.body.kontakts
+        };
+    
+    User.create(obj, (err, user) => {
+        if (err || !user) {
+            return res.status(500).json({'error': err});
+        }
+        
+        return res.status(201).json(user);
+    });
+});
+
 // POST /card: Create a business card
 // Don't need bodyParser as second arg because we set it using app.use()
 app.post('/card', (req, res) => {
@@ -102,60 +152,10 @@ app.post('/card', (req, res) => {
         return res.status(201).json(card);
     });
 });
-*/
-
-/* 
-// POST /card/send: Send the current user's card to the selected user
-app.post('/card/send', (req, res) => {
-    let postData = {
-        fromUser: req.body.from
-        toUser: req.body.to
-    };    
-    
-    // > Query for the 'from' user's card.
-    // > Take that card and push it onto the 'to' user's kontakts array
-});
-*/
 
 /*
-// GET /users/:searchTerm : Get all users where first or last name contains `searchTerm`
-app.get('/users/:searchTerm', (req, res) => {
-    let searchTerm = req.body.searchTerm;
-    
-    console.log('A GET request to /user was received!');
-    User.find({}, (err, users) => {
-        if (err || !users) {
-            res.status(500).json({'error': err});
-        }
-        console.log('user list: ', users);
-        res.status(201).json(users);
-    });
-});
-*/
-
-
-// POST /user: Create a new user
-app.post('/user', (req, res) => {
-    console.log('A POST request to /user was received!');
-    console.log('req dot body: ', req.body);
-    let obj = {
-            id: 1001,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            userName: req.body.userName, 
-            password: req.body.password,
-            avatar: req.body.avatar,
-            kontakts: req.body.kontakts
-        };
-    
-    User.create(obj, (err, user) => {
-        if (err || !user) {
-            return res.status(500).json({'error': err});
-        }
-        
-        return res.status(201).json(user);
-    });
-});
+ * PROCEDURAL CODE
+ */
 
 // Set up MongoDB connection. The moment you connect to localhost/kontakt, it will create it if not exists.
 let runServer = (callback) => {
@@ -174,8 +174,6 @@ let runServer = (callback) => {
     });
 };
 
-
-
 if (require.main === module) {  // If this script is run directly (not required somewhere else)
     runServer(function(err) {
         if (err) {
@@ -183,7 +181,6 @@ if (require.main === module) {  // If this script is run directly (not required 
         }
     });
 }
-
 
 /*
  * EXPORTS
