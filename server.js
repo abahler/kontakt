@@ -92,14 +92,17 @@ app.post('/card/send', (req, res) => {
 
 // GET /users/:searchTerm : Get all users where first or last name contains `searchTerm`
 app.get('/users/:searchTerm', (req, res) => {
-    let searchTerm = req.body.searchTerm;
+    let searchTerm = req.params.searchTerm;
     let regex = new RegExp(searchTerm, 'i');
+    
+    console.log('searchTerm: ', searchTerm);
+    console.log('regex: ', regex);
 
-    console.log('A GET request to /user was received!');
     User.find({"firstName": {$regex: regex}}, (err, users) => {
         if (err || !users) {
             res.status(500).json({'error': err});
         }
+        
         res.status(201).json(users);
     });
 });
