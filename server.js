@@ -97,7 +97,22 @@ app.get('/users/:searchTerm', (req, res) => {
     console.log('searchTerm: ', searchTerm);
     console.log('regex: ', regex);
 
-    User.find({"firstName": {$regex: regex}}, (err, users) => {
+    // TODO: match regex on firstName or lastName
+    /*
+    let query = {
+        "firstName": {$regex: regex}
+    };
+    */
+    let query = {
+        $match: {
+            $or: [
+                {"firstName": {$regex: regex}}, 
+                {"lastName": {$regex: regex}}
+            ]
+        }
+    };
+    // Replace find() with aggregate() if you want to do an OR condition
+    User.aggregate(query, (err, users) => {
         if (err || !users) {
             res.status(500).json({'error': err});
         }
