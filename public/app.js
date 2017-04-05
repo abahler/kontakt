@@ -128,10 +128,16 @@ const MOCK_USERS = {
  * Screens
  */
 
+// Hard-code username for testing, in lieu of authentication
+let loggedUser = 'abahler';
+
 // 'My Card'
 let getCard = (cb, isEditable) => { 
-    setTimeout(cb(MOCK_CARDS, isEditable), 3000);
+    $.get('/card/' + loggedUser, (userCard) => {
+        displayCard(userCard);
+    });
 };
+
 let displayCard = (data, editable) => {
     // build HTML with `data`
     let editIcon = '';
@@ -148,7 +154,7 @@ let displayCard = (data, editable) => {
     output += `<p>Office Phone: ${data.officePhone} ${editIcon}</p>`;
     
     // Above fields are required. Provide fallback message if optional one has no value.
-    let phoneVal = data.officePhone || 'Add an office phone';
+    let phoneVal = data.cellPhone || 'Add an office phone';
     output += `<p>Cell Phone: ${phoneVal}</p>`;
     
     $('#root').html(output);
@@ -157,7 +163,8 @@ let displayCard = (data, editable) => {
 // 'Search Users'
 let getUserSearch = (cb) => {
     setTimeout(cb(MOCK_USERS), 3000);
-};       
+};
+
 let displayUserSearch = (data) => {
     // Assume there are users to choose from
     let users = data.users;
