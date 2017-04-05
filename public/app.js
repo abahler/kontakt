@@ -161,8 +161,10 @@ let displayCard = (data, editable) => {
 };
 
 // 'Search Users'
-let getUserSearch = (cb) => {
-    setTimeout(cb(MOCK_USERS), 3000);
+let getUserSearch = (cb, val) => {
+    $.get('/users/' + val, (d) => {
+        displayUserSearch(d);
+    });
 };
 
 let displayUserSearch = (data) => {
@@ -191,7 +193,6 @@ let displayCardBeforeSend = (data) => {
     let customNote = '<p><textarea id="customNote" name="customNote"></textarea></p>';
     
     $('#root').html(existingHTML + customNote);
-    
 };
 
 // 'My Kontakts'
@@ -235,9 +236,15 @@ let main = () => {
         getKontakts(displayKontakts);
     });
     
-    // The class 'user' will be on every list result thumbnail in the user search.
-    $('.user').click( () => {
-        getCard(displayCardBeforeSend, true);
+    $('#search').keyup( () => {
+        let searchTerm = $(this).val();
+        
+        getUserSearch(displayUserSearch, searchTerm);
+    
+        // The class 'user' will be on every list result thumbnail in the user search.
+        $('.user').click( () => {
+            getCard(displayCardBeforeSend, true);
+        });
     });
 };
 
