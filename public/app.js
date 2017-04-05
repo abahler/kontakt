@@ -129,7 +129,7 @@ const MOCK_USERS = {
  */
 
 // Hard-code username for testing, in lieu of authentication
-let loggedUser = 'abahler';
+let loggedUser = 'dluna';
 
 // 'My Card'
 let getCard = (cb, isEditable) => { 
@@ -201,8 +201,9 @@ let getKontakts = (cb) => {
     });
 };
 let displayKontakts = (data) => {
+    let kontakts = data.kontakts;
     let output = '<ul>';
-    data.forEach( (v,i) => {
+    kontakts.forEach( (v,i) => {
         output += '<li>';
         output += `First name: ${v['firstName']}<br>`;
         output += `Last name: ${v['lastName']}<br>`;
