@@ -196,12 +196,13 @@ let displayCardBeforeSend = (data) => {
 
 // 'My Kontakts'
 let getKontakts = (cb) => {
-    setTimeout(cb(MOCK_KONTAKTS), 3000);
+    $.get('/kontakts/' + loggedUser, (kontakts) => {
+        displayKontakts(kontakts);
+    });
 };
 let displayKontakts = (data) => {
-    let kontakts = data.kontakts;
     let output = '<ul>';
-    kontakts.forEach( (v,i) => {
+    data.forEach( (v,i) => {
         output += '<li>';
         output += `First name: ${v['firstName']}<br>`;
         output += `Last name: ${v['lastName']}<br>`;
