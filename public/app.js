@@ -234,6 +234,11 @@ let main = () => {
     $('#myKontakts').click( () => {
         getKontakts(displayKontakts);
     });
+    
+    // The class 'user' will be on every list result thumbnail in the user search.
+    $('.user').click( () => {
+        getCard(displayCardBeforeSend, true);
+    });
 };
 
 $(document).ready(main);
