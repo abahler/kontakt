@@ -76,18 +76,21 @@ app.get('/card/:userName', (req, res) => {
     });
 });
 
-/* 
 // POST /card/send: Send the current user's card to the selected user
 app.post('/card/send', (req, res) => {
     let postData = {
-        fromUser: req.body.from
+        fromUser: req.body.from,
         toUser: req.body.to
-    };    
+    };
     
+    console.log('A POST request to /card/send was received!');
+    console.log('postData: ', postData);
+    
+    res.status(201).json({"message": "Your card has been sent!"});    
+    // TODO: actually push onto user's kontakts list, with 'accepted' flag set to false
     // > Query for the 'from' user's card.
     // > Take that card and push it onto the 'to' user's kontakts array
 });
-*/
 
 // GET /users/:searchTerm : Get all users where first or last name contains `searchTerm`
 app.get('/users/:searchTerm', (req, res) => {
