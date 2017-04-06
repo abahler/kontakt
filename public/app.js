@@ -134,7 +134,7 @@ let loggedUser = 'dluna';
 // 'My Card'
 let getCard = (cb, isEditable) => { 
     $.get('/card/' + loggedUser, (userCard) => {
-        displayCard(userCard);
+        cb(userCard, isEditable);
     });
 };
 
@@ -157,43 +157,36 @@ let displayCard = (data, editable) => {
     let phoneVal = data.cellPhone || 'Add an office phone';
     output += `<p>Cell Phone: ${phoneVal}</p>`;
     
+    if (editable) {
+        output += '<p><textarea id="addlNote" name="customNote"></textarea></p>';
+    }
+    
     $('#root').html(output);
 };
 
 // 'Search Users'
 let getUserSearch = (cb, val) => {
-    $.get('/users/' + val, (d) => {
-        displayUserSearch(d);
-    });
+    if (val.length >= 1) {
+        $.get('/users/' + val, (d) => {
+            cb(d);
+        });        
+    }
 };
 
 let displayUserSearch = (data) => {
     // Assume there are users to choose from
-    let users = data.users;
-    let output = '<ul>';
-    users.forEach( (v,i) => {
-        output += '<li><img src="${v.avatar}" /><p>${v.username}<br />${v.firstName} ${v.lastName}</p></li>';
-    });
-    output += '</ul>';
-    
-    $('#root').html(output);
+    if (data.users && data.users.length > 0) {
+        let users = data.users;
+        let output = '<ul>';
+        users.forEach( (v,i) => {
+            // Use v.avatar when you have them
+            output += '<li>${v.firstName} ${v.lastName}<br />${v.username}<br /></li>';
+        });
+        output += '</ul>';
+        
+        $('#root').html(output);
+    }
 };   // This displays users that match the search term, or a 'Start typing a name...' message
-
-// 'Send Card'
-// Note: no accompanying 'get' function here, 
-// because getCard can be called with the displayCardBeforeSend function as a callback
-// (only a couple differences between displaying card for reference and displaying before sending)
-let displayCardBeforeSend = (data) => {
-    // Display all the usual information the user would see in their own
-    displayCard(data, true);
-    
-    // And add/modify fields for customization
-    var existingHTML = $('#root').html();
-    
-    let customNote = '<p><textarea id="customNote" name="customNote"></textarea></p>';
-    
-    $('#root').html(existingHTML + customNote);
-};
 
 // 'My Kontakts'
 let getKontakts = (cb) => {
@@ -243,7 +236,7 @@ let main = () => {
     
         // The class 'user' will be on every list result thumbnail in the user search.
         $('.user').click( () => {
-            getCard(displayCardBeforeSend, true);
+            getCard(displayCard, true);
         });
     });
 };
