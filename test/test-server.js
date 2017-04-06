@@ -33,7 +33,7 @@ describe('kontakt', function(){
 
     it('should return a 201 on a GET for /kontakts/dluna', function(done) {
         chai.request(app)
-        .get("/kontakts/dluna")
+        .get('/kontakts/dluna')
         .end( function(err, res){
             console.log('res: ', res);
             should.equal(err, null);
