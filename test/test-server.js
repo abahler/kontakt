@@ -31,9 +31,20 @@ describe('kontakt', function(){
         });
     });
 
-    it('should return a 201 on a GET for /kontakts/dluna', function(done) {
+    it("should return a 201 on a GET for a user's kontakts", function(done) {
         chai.request(app)
         .get('/kontakts/dluna')
+        .end( function(err, res){
+            console.log('res: ', res);
+            should.equal(err, null);
+            res.should.have.status(201);
+            done();
+        });
+    });
+    
+    it("should return a 201 on a GET for a user's card", function(done) {
+        chai.request(app)
+        .get('/card/csmith')
         .end( function(err, res){
             console.log('res: ', res);
             should.equal(err, null);
