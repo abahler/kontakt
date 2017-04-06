@@ -205,6 +205,6 @@ if (require.main === module) {  // If this script is run directly (not required 
 /*
  * EXPORTS
  */
- 
-module.exports = app;
-module.exports = runServer;
+
+module.exports.app = app;
+module.exports.runServer = runServer;
