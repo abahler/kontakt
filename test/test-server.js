@@ -29,6 +29,13 @@ describe('kontakt', function(){
             });
         });
     });
+    
+    afterEach(function(done) {
+        // Remove entire collection
+        User.remove({"userName": "jdoe123"}, function() {
+            done();
+        });
+    }); 
 
     it('should return a 200 on a GET for the root URL', function(done){
         chai.request(app)
@@ -71,5 +78,5 @@ describe('kontakt', function(){
     //         done();
     //     });
     // });
-    
+
 });
