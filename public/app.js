@@ -166,21 +166,26 @@ let displayCard = (data, editable) => {
 
 // 'Search Users'
 let getUserSearch = (cb, val) => {
+    console.log('We are inside the getUserSearch function!');
     if (val.length >= 1) {
-        $.get('/users/' + val, (d) => {
+        let url = '/users/' + val;
+        $.get(url, (d) => {
+            console.log('Response from ' + url + ': ', d);
             cb(d);
         });        
     }
 };
 
 let displayUserSearch = (data) => {
+    console.log('We are inside the displayUserSearch function');
+    console.log('Data passed to displayUserSearch: ', data);
     // Assume there are users to choose from
     if (data.users && data.users.length > 0) {
         let users = data.users;
         let output = '<ul>';
         users.forEach( (v,i) => {
             // Use v.avatar when you have them
-            output += '<li>${v.firstName} ${v.lastName}<br />${v.username}<br /></li>';
+            output += `<li>${v.firstName} ${v.lastName}<br />${v.userName}<br /></li>`;
         });
         output += '</ul>';
         
@@ -229,15 +234,19 @@ let main = () => {
         getKontakts(displayKontakts);
     });
     
-    $('#search').keyup( () => {
-        let searchTerm = $(this).val();
-        
+    $('#search').keyup( (e) => {
+
+        let searchTerm = e.target.value;
+        console.log('search term: ', searchTerm);
+
         getUserSearch(displayUserSearch, searchTerm);
-    
+        
+        /*    
         // The class 'user' will be on every list result thumbnail in the user search.
         $('.user').click( () => {
             getCard(displayCard, true);
         });
+        */
     });
 };
 
