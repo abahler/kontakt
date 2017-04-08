@@ -16,6 +16,7 @@ describe('kontakt', function(){
     // Must have Mongo running, or the 'before' and 'after' hooks will result in timeout errors
     beforeEach(function(done) {
         // Question: how to best create a User and a Card, then call done()?
+        // FAIL: creating the User, then creating the Card in the callback, and calling done() in that callback
         
         server.runServer(function() {
             User.create({
@@ -23,22 +24,8 @@ describe('kontakt', function(){
                 lastName: 'Doe',
                 userName: 'jdoe123',
                 password: 'thisistest'
-            }, function() {
-                Card.create({
-                    firstName: 'Jane',
-                    lastName: 'Doe',
-                    userName: 'jdoe123',
-                    occupation: 'Senior QA Engineer',
-                    professionalSummary: 'I make sure tests pass!',
-                    company: 'Test Inc.',
-                    officePhone: '555-111-2222',
-                    cellPhone: '',
-                    addlNote: ''
-                }, function(){
-                    done();
-                });
-                
-                // done();
+            }, () => {
+                done();
             });
         });
     });
@@ -76,7 +63,7 @@ describe('kontakt', function(){
     
     // it("should return a 201 on a GET for a user's card", function(done) {
     //     chai.request(app)
-    //     .get('/card/csmith')
+    //     .get('/card/jdoe')
     //     .end( function(err, res){
     //         console.log('res: ', res);
     //         should.equal(err, null);
