@@ -45,11 +45,13 @@ app.get('/admin', (req, res) => {
 // GET /kontakts/:username: Get all Kontakts (business cards) for the specified user
 app.get('/kontakts/:username', (req, res) => {
     let userName = req.params.username;
+    console.log('This is the username: ', userName);
     
     // let outerCards;
     User.findOne({"userName": userName}, (err, user) => {         
         if (err || !user) {
-            res.status(500).json({'error': err});
+            console.log('the err: ', err);
+            return res.status(500).json({'error': err});
         }
         
         console.log('user object: ', user);
