@@ -122,7 +122,8 @@ app.get('/users/:searchTerm', (req, res) => {
             res.status(500).json({'error': err});
         }
         
-        res.status(201).json(users);
+        
+        res.status(201).json({"users": users});
     });
 });
 
