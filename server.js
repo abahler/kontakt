@@ -28,21 +28,6 @@ app.get('/', (req, res) => {
     res.status(200).send('Hello World!');
 });
 
-// GET /foobar: Return some dummy JSON
-app.get('/foobar', (req, res) => {
-    res.status(201).json({"message": "success!"});
-});
-
-// GET /admin: A sandbox for digging into internals and debugging
-app.get('/admin', (req, res) => {
-    // TODO: enhance after MVP stage to check for proper permissions in current user object
-    res.status(201).json({"process-dot-env": process.env});
-    
-    global.adminDidThis = 'The admin says hello';
-    
-    console.log('global: ', global);
-});
-
 // GET /kontakts: Get all Kontakts (cards).
 // TODO: enhance to take username parameter, and get all kontakts for that user
 app.get('/kontakts/:username', (req, res) => {
@@ -54,21 +39,17 @@ app.get('/kontakts/:username', (req, res) => {
             res.status(500).json({'error': err});
         }
         
-        console.log('cards object: ', cards);
         outerCards['cards'] = cards;
     });
     
     res.status(201).json(outerCards);
 });
 
-
-
 // GET /card/:userName: Retrieve current user's card.
 // > NOTE: this will be used to show card both for reference ('My Card') and before sending to a new kontakt ('Send Card')
 // > Client will take care of displaying add'l features for the latter, like 'Edit' icons
 // app.get('/card/:userName', (req, res) => {});
 
-/*
 // POST /card: Create a business card
 // Don't need bodyParser as second arg because we set it using app.use()
 app.post('/card', (req, res) => {
@@ -94,9 +75,8 @@ app.post('/card', (req, res) => {
         return res.status(201).json(card);
     });
 });
-*/
 
-/* 
+/*
 // POST /card/send: Send the current user's card to the selected user
 app.post('/card/send', (req, res) => {
     let postData = {
@@ -125,7 +105,6 @@ app.get('/users/:searchTerm', (req, res) => {
 });
 */
 
-
 // POST /user: Create a new user
 app.post('/user', (req, res) => {
     console.log('A POST request to /user was received!');
@@ -151,14 +130,12 @@ app.post('/user', (req, res) => {
 
 // Set up MongoDB connection. The moment you connect to localhost/kontakt, it will create it if not exists.
 let runServer = (callback) => {
-    console.log('db url: ', config.DATABASE_URL);
     mongoose.connect(config.DATABASE_URL, (err) => {
         if (err && callback) {
             return callback(err);
         }
 
         app.listen(config.PORT, () => {
-            console.log('Listening on localhost:' + config.PORT);
             if (callback) {     // Signal that everything is up and running
                 callback();
             }
