@@ -53,8 +53,6 @@ app.get('/kontakts/:username', (req, res) => {
 // POST /card: Create a business card
 // Don't need bodyParser as second arg because we set it using app.use()
 app.post('/card', (req, res) => {
-    console.log('A POST request to /card was received!');
-    console.log('req dot body: ', req.body);
     let newCard = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -94,12 +92,10 @@ app.post('/card/send', (req, res) => {
 app.get('/users/:searchTerm', (req, res) => {
     let searchTerm = req.body.searchTerm;
     
-    console.log('A GET request to /user was received!');
     User.find({}, (err, users) => {
         if (err || !users) {
             res.status(500).json({'error': err});
         }
-        console.log('user list: ', users);
         res.status(201).json(users);
     });
 });
@@ -107,8 +103,6 @@ app.get('/users/:searchTerm', (req, res) => {
 
 // POST /user: Create a new user
 app.post('/user', (req, res) => {
-    console.log('A POST request to /user was received!');
-    console.log('req dot body: ', req.body);
     let obj = {
             id: 1001,
             firstName: req.body.firstName,
@@ -146,7 +140,7 @@ let runServer = (callback) => {
 if (require.main === module) {  // If this script is run directly (not required somewhere else)
     runServer(function(err) {
         if (err) {
-            console.error(err);
+		console.log('Error: ', err);
         }
     });
 }
